@@ -1,0 +1,33 @@
+name: propose-valid
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  propose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Create harmless valid proposal
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          branch="builder/proposal-${GITHUB_RUN_ID}"
+          git switch -c "$branch"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          printf '\nProposal run: %s\n' "$GITHUB_RUN_ID" >> packages/example-package/example-package.md
+          git add packages/example-package/example-package.md
+          git commit -m "Builder proposal from run ${GITHUB_RUN_ID}"
+          git push origin "$branch"
+          gh pr create \
+            --base main \
+            --head "$branch" \
+            --title "Valid builder proposal ${GITHUB_RUN_ID}" \
+            --body "Created by the constrained builder workflow. Requires independent verification and Alex's approval."
