@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "required_parts": ["document", "config", "executable"],
+  "allowed_extensions": {
+    "document": ".md",
+    "config": ".json",
+    "executable": ".py"
+  },
+  "forbid_undeclared_package_files": true,
+  "require_self_tests": true
+}

@@ -1,0 +1,4 @@
+/.github/workflows/ @OWNER
+/policy/ @OWNER
+/verifier.py @OWNER
+/CODEOWNERS @OWNER

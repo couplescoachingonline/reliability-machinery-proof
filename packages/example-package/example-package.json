@@ -1,0 +1,19 @@
+{
+  "name": "example-package",
+  "version": 1,
+  "parts": {
+    "document": "packages/example-package/example-package.md",
+    "config": "packages/example-package/example-package.json",
+    "executable": "packages/example-package/example-package.py"
+  },
+  "tests": [
+    {
+      "input": {"left": 2, "right": 3},
+      "expected": {"sum": 5}
+    },
+    {
+      "input": {"left": -1, "right": 1},
+      "expected": {"sum": 0}
+    }
+  ]
+}
