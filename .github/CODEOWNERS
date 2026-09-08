@@ -1,4 +1,4 @@
-/.github/workflows/ @OWNER
-/policy/ @OWNER
-/verifier.py @OWNER
-/CODEOWNERS @OWNER
+/.github/workflows/ @couplescoachingonline
+/policy/ @couplescoachingonline
+/verifier.py @couplescoachingonline
+/.github/CODEOWNERS @couplescoachingonline
