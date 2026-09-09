@@ -1,19 +1,34 @@
 {
+  "digests": {
+    "config": "7656158feffa8048b36b57a215d7380dae64b5d6e55734fbc9553271a1bb0481",
+    "document": "e277802d134e7e8c3d35a6750e5a8418f85e88837bea5a8affac38dd1baccccc",
+    "executable": "91875c17a7db006f72718bca3a4891995662e6449ccaccf867f1216684153c2b"
+  },
   "name": "example-package",
-  "version": 1,
   "parts": {
-    "document": "packages/example-package/example-package.md",
     "config": "packages/example-package/example-package.json",
+    "document": "packages/example-package/example-package.md",
     "executable": "packages/example-package/example-package.py"
   },
   "tests": [
     {
-      "input": {"left": 2, "right": 3},
-      "expected": {"sum": 5}
+      "expected": {
+        "sum": 5
+      },
+      "input": {
+        "left": 2,
+        "right": 3
+      }
     },
     {
-      "input": {"left": -1, "right": 1},
-      "expected": {"sum": 0}
+      "expected": {
+        "sum": 0
+      },
+      "input": {
+        "left": -1,
+        "right": 1
+      }
     }
-  ]
+  ],
+  "version": 1
 }
