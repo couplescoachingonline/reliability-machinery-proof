@@ -1,0 +1,43 @@
+{
+  "digests": {
+    "config": "7aa76a4355f5b9a773fda0419d7173e1ba8a04dd4de527861799a2e40b26ba38",
+    "document": "e2f20fe4ddb52469c8a64609d9272f640a6617f661deac19e04d0e67fd3348e6",
+    "executable": "cd62b6b0e5509faf95f97c94651d12bc55f5e5c24985f1cb7f01c155834e1989"
+  },
+  "name": "package-control",
+  "parts": {
+    "config": "packages/package-control/package-control.json",
+    "document": "packages/package-control/package-control.md",
+    "executable": "packages/package-control/package-control.py"
+  },
+  "tests": [
+    {
+      "expected": {
+        "missing": [],
+        "valid": true
+      },
+      "input": {
+        "parts": [
+          "document",
+          "config",
+          "executable"
+        ]
+      }
+    },
+    {
+      "expected": {
+        "missing": [
+          "executable"
+        ],
+        "valid": false
+      },
+      "input": {
+        "parts": [
+          "document",
+          "config"
+        ]
+      }
+    }
+  ],
+  "version": 1
+}
