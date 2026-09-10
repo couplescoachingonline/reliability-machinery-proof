@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "required_parts": ["document", "config", "executable"],
   "allowed_extensions": {
     "document": ".md",
@@ -7,5 +7,7 @@
     "executable": ".py"
   },
   "forbid_undeclared_package_files": true,
-  "require_self_tests": true
+  "require_self_tests": true,
+  "require_digests": true,
+  "require_conventional_names": true
 }

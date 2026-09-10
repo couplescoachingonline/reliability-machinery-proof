@@ -65,6 +65,38 @@ class VerifierAttackTests(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("path escapes repository", result.stdout)
 
+    def test_digest_drift_is_blocked(self):
+        temporary, candidate = self.make_candidate()
+        self.addCleanup(temporary.cleanup)
+        document = candidate / "packages/example-package/example-package.md"
+        document.write_text(document.read_text() + "\nunapproved drift\n")
+        result = self.verify(candidate)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("digest mismatch: document", result.stdout)
+
+    def test_nonconforming_filename_is_blocked(self):
+        temporary, candidate = self.make_candidate()
+        self.addCleanup(temporary.cleanup)
+        source = candidate / "packages/example-package/example-package.md"
+        renamed = candidate / "packages/example-package/readme.md"
+        source.rename(renamed)
+        config_path = candidate / "packages/example-package/example-package.json"
+        config = json.loads(config_path.read_text())
+        config["parts"]["document"] = "packages/example-package/readme.md"
+        config_path.write_text(json.dumps(config))
+        result = self.verify(candidate)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("nonconforming filename", result.stdout)
+
+    def test_control_room_gives_action(self):
+        temporary, candidate = self.make_candidate()
+        self.addCleanup(temporary.cleanup)
+        result = self.verify(candidate)
+        self.assertEqual(result.returncode, 0)
+        control_room = (candidate / "CONTROL-ROOM.md").read_text()
+        self.assertIn("## Action required", control_room)
+        self.assertIn("Review and approve the exact GitHub pull request", control_room)
+
 
 if __name__ == "__main__":
     unittest.main()
